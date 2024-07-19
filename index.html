@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Docker</title>
+    <link href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Docker: Simplified Containerization</h1>
+        <p>Your comprehensive guide to understanding Docker and its syntax.</p>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#what-is-docker">What is Docker?</a></li>
+            <li><a href="#docker-syntax">Docker Syntax</a></li>
+            <li><a href="#creating-dockerfile">Creating a Dockerfile</a></li>
+            <li><a href="#building-image">Building an Image</a></li>
+            <li><a href="#running-container">Running a Container</a></li>
+            <li><a href="#uploading-image">Uploading to Docker Hub</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="what-is-docker" class="card">
+            <h2>What is Docker?</h2>
+            <p>Docker is a platform that enables developers to automate the deployment of applications inside lightweight, portable containers. Containers package an application and its dependencies together, ensuring consistent runs across different environments.</p>
+            <div class="feature-list">
+                <h3>With Docker, you can:</h3>
+                <ul>
+                    <li>Run applications in isolated environments</li>
+                    <li>Share and distribute applications easily</li>
+                    <li>Scale applications quickly and efficiently</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="docker-syntax" class="card">
+            <h2>Docker Syntax</h2>
+            <p>Docker uses a specific syntax in its commands. Here are some common commands:</p>
+            <div class="command-list">
+                <ul>
+                    <li><code>docker build</code>: Builds an image from a Dockerfile</li>
+                    <li><code>docker run</code>: Runs a container from an image</li>
+                    <li><code>docker push</code>: Uploads an image to Docker Hub</li>
+                    <li><code>docker pull</code>: Downloads an image from Docker Hub</li>
+                    <li><code>docker images</code>: Lists all images on your local machine</li>
+                    <li><code>docker ps</code>: Lists all running containers</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="creating-dockerfile" class="card">
+            <h2>Creating a Dockerfile</h2>
+            <p>A Dockerfile is a text file that contains instructions on how to build a Docker image. Here's a simple example:</p>
+            <pre><code>FROM ubuntu:20.04
+RUN apt-get update && apt-get install -y python3
+COPY . /app
+WORKDIR /app
+CMD ["python3", "app.py"]</code></pre>
+            <div class="explanation">
+                <h3>This Dockerfile does the following:</h3>
+                <ul>
+                    <li><code>FROM</code>: Specifies the base image (Ubuntu 20.04)</li>
+                    <li><code>RUN</code>: Executes commands in the container</li>
+                    <li><code>COPY</code>: Copies files from your local machine to the container</li>
+                    <li><code>WORKDIR</code>: Sets the working directory for subsequent commands</li>
+                    <li><code>CMD</code>: Specifies the command to run when the container starts</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="building-image" class="card">
+            <h2>Building an Image</h2>
+            <p>To build an image from your Dockerfile, use the following command:</p>
+            <pre><code>docker build -t my-python-app .</code></pre>
+            <p>This command builds the image and tags it as <code>my-python-app</code>. The <code>.</code> specifies the current directory as the build context.</p>
+        </section>
+
+        <section id="running-container" class="card">
+            <h2>Running a Container</h2>
+            <p>Once the image is built, you can run a container using:</p>
+            <pre><code>docker run -d -p 5000:5000 my-python-app</code></pre>
+            <div class="explanation">
+                <h3>This command does the following:</h3>
+                <ul>
+                    <li><code>-d</code>: Runs the container in detached mode (background)</li>
+                    <li><code>-p 5000:5000</code>: Maps port 5000 of the container to port 5000 on your host machine</li>
+                    <li><code>my-python-app</code>: Specifies the image to run</li>
+                </ul>
+            </div>
+            <p>After running this command, your application will be accessible at <code>http://localhost:5000</code>.</p>
+        </section>
+
+        <section id="uploading-image" class="card">
+            <h2>Uploading an Image to Docker Hub</h2>
+            <p>To upload your image to Docker Hub, follow these steps:</p>
+            <ol>
+                <li>Log in to Docker Hub:
+                    <pre><code>docker login</code></pre>
+                </li>
+                <li>Tag your image with your Docker Hub username:
+                    <pre><code>docker tag my-python-app your-dockerhub-username/my-python-app</code></pre>
+                </li>
+                <li>Push the image to Docker Hub:
+                    <pre><code>docker push your-dockerhub-username/my-python-app</code></pre>
+                </li>
+            </ol>
+            <p>Make sure to replace <code>your-dockerhub-username</code> with your actual Docker Hub username.</p>
+        </section>
+    </main>
+</body>
+</html>
